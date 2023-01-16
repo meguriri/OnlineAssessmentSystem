@@ -1,7 +1,14 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"net/http"
 
-func InitRouter(r *gin.Engine) {
+	"github.com/gin-gonic/gin"
+)
 
+func InitRouter(router *gin.Engine) {
+	router.LoadHTMLGlob("static/html/*")
+	router.StaticFS("/css", http.Dir(".static/css"))
+	router.StaticFS("/images", http.Dir(".static/images"))
+	router.StaticFS("/js", http.Dir(".static/js"))
 }
