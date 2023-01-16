@@ -1,11 +1,15 @@
 package constant
 
-var (
+const (
 	UserTypeAdmin   = 0
 	UserTypeStudent = 1
 	UserTypeTeacher = 2
 )
 
-var (
+const (
 	TableUser = "user"
+)
+
+const (
+	ErrRecordNotFound = "record not found"
 )
