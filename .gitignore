@@ -14,5 +14,9 @@
 # MODULES
 *.mod
 *.sum
+
+
+# GOLAND idea
+.idea
 # Dependency directories (remove the comment below to include it)
 # vendor/
