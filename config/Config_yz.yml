@@ -1,0 +1,2 @@
+mysql:
+  dsn: root:256275@tcp(localhost:3306)/management_system?charset=utf8mb4&parseTime=True&loc=Local
