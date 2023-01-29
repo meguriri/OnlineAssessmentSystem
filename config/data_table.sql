@@ -11,3 +11,22 @@ create table `knowledge_point`(
     facility_value int not null default 1 COMMENT "难度 1-2-3-4-5 5个档位"
     
 );
+
+create table `class`(
+    id int NOT NULL auto_increment PRIMARY KEY,
+    name varchar(20) default null,
+    introduction varchar(500) default null,
+    type int default null
+);
+
+create table `teach`(
+    id int NOT NULL auto_increment PRIMARY KEY,
+    teacher_id varchar(20) NOT NULL,
+    class_id int NOT NULL
+);
+
+create table `elective`(
+    id int NOT NULL auto_increment PRIMARY KEY,
+    student_id varchar(20) NOT NULL,
+    class_id int NOT NULL
+);

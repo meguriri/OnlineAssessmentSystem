@@ -12,3 +12,22 @@ type KnowledgePoint struct {
 	Name          string `json:"name" gorm:"name"`
 	FacilityValue int    `json:"facility_value" gorm:"facility_value"`
 }
+
+type Class struct {
+	ID           int    `json:"id" gorm:"id"`
+	Type         int    `json:"type" gorm:"type"`
+	Name         string `json:"name" gorm:"name"`
+	Introduction string `json:"introduction" gorm:"introduction"`
+}
+
+type Teach struct {
+	ID        int    `json:"id" gorm:"id"`
+	TeacherID string `json:"teacher_id" gorm:"teacher_id"`
+	ClassID   int    `json:"class_id" gorm:"class_id"`
+}
+
+type Elective struct {
+	ID        int    `json:"id" gorm:"id"`
+	StudentID string `json:"student_id" gorm:"student_id"`
+	ClassID   int    `json:"class_id" gorm:"class_id"`
+}

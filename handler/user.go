@@ -65,3 +65,18 @@ func Register(c *gin.Context) {
 		Code: constant.CodeSuccess,
 	})
 }
+
+func UpdateUser(c *gin.Context) {
+	updateInfo := body.UpdateUserReq{}
+
+	err := util.PostForm(c, &updateInfo)
+	if err != nil {
+		log.Printf("[UpdateUser] PostForm err,err:%+v", err)
+		c.JSON(http.StatusOK, body.Res{
+			Code: constant.CodeErr,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+}

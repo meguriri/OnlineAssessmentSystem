@@ -39,3 +39,26 @@ func CreateUser(id, name, password string, typ int) error {
 	}
 	return nil
 }
+
+func UpdateUser(id, oldPassword, newPassword string) error {
+	user, err := database.GetUserByID(id)
+	if err != nil {
+		log.Printf("[UpdateUser] GetUserByID err,id:%+v,err:%+v", id, err)
+		return err
+	}
+
+	if user.Password != oldPassword {
+		log.Printf("[UpdateUser] wrong old password,id:%+v,user:%+v", id, user)
+		return errors.New(constant.WrongOldPassword)
+	}
+
+	user.Password = newPassword
+
+	err = database.UpdateUserByID(user.ID, user)
+	if err != nil {
+		log.Printf("[UpdateUser] UpdateUserByID err,user:%+v,err:%+v", user, err)
+		return err
+	}
+
+	return nil
+}

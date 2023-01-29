@@ -2,6 +2,7 @@ package constant
 
 const (
 	WrongIDOrPassword = "用户名或密码错误"
+	WrongOldPassword  = "旧密码错误"
 )
 
 const (

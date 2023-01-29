@@ -9,6 +9,9 @@ const (
 const (
 	TableUser           = "user"
 	TableKnowledgePoint = "knowledge_point"
+	TableClass          = "class"
+	TableTeach          = "teach"
+	TableElective       = "elective"
 )
 
 const (
