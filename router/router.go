@@ -7,7 +7,7 @@ import (
 
 func InitRouter(router *gin.Engine) {
 	router.Static("/static", "./static/")
-	router.LoadHTMLGlob("templates/*")
+	router.LoadHTMLGlob("template/*")
 	router.POST("/login", handler.Login)
 	router.POST("/register", handler.Register)
 }

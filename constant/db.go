@@ -7,7 +7,8 @@ const (
 )
 
 const (
-	TableUser = "user"
+	TableUser           = "user"
+	TableKnowledgePoint = "knowledge_point"
 )
 
 const (
