@@ -12,6 +12,8 @@ const (
 	TableClass          = "class"
 	TableTeach          = "teach"
 	TableElective       = "elective"
+	TableSubject        = "subject"
+	TableTestPaper      = "test_paper"
 )
 
 const (

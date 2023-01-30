@@ -31,3 +31,17 @@ type Elective struct {
 	StudentID string `json:"student_id" gorm:"student_id"`
 	ClassID   int    `json:"class_id" gorm:"class_id"`
 }
+
+type Subject struct {
+	ID      int    `json:"id" gorm:"id"`
+	Content string `json:"content" gorm:"content"`
+	Answer  string `json:"answer" gorm:"answer"`
+	Type    int    `json:"type" gorm:"type"`
+}
+
+type TestPaper struct {
+	ID            int    `json:"id" gorm:"id"`
+	SubjectList   string `json:"subject_list" gorm:"subject_list"`
+	Creater       string `json:"creater" gorm:"creater"`
+	FacilityValue int    `json:"facility_value" gorm:"facility_value"`
+}

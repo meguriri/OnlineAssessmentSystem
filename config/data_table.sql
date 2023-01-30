@@ -30,3 +30,17 @@ create table `elective`(
     student_id varchar(20) NOT NULL,
     class_id int NOT NULL
 );
+
+create table `subject`(
+    id int NOT NULL auto_increment PRIMARY KEY,
+    content varchar(100) NOT NULL,
+    answer varchar(100),
+    type int default 1
+);
+
+create table `test_paper`(
+     id int NOT NULL auto_increment PRIMARY KEY,
+     subject_list varchar(500),
+     creater varchar(20),
+     facility_value int not null default 1 COMMENT "难度 1-2-3-4-5 5个档位"
+);
