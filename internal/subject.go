@@ -5,6 +5,7 @@ import (
 
 	"github.com/meguriri/OnlineAssessmentSystem/database/model"
 	database "github.com/meguriri/OnlineAssessmentSystem/database/operation"
+	"github.com/meguriri/OnlineAssessmentSystem/handler/body"
 )
 
 func CreateSubject(content string, anwser string, typ int) error {
@@ -48,4 +49,24 @@ func DeleteSubject(id int) error {
 	}
 
 	return nil
+}
+
+func GetSubjectList() ([]body.GetSubjectRes, error) {
+	subjectList := []body.GetSubjectRes{}
+
+	subject, err := database.GetAllSubject()
+	if err != nil {
+		log.Printf("[GetSubjectList] GetSubjectList err,err:%+v", err)
+	}
+
+	for _, item := range subject {
+		subjectList = append(subjectList, body.GetSubjectRes{
+			ID:      item.ID,
+			Content: item.Content,
+			Answer:  item.Answer,
+		})
+	}
+
+	return subjectList, nil
+
 }

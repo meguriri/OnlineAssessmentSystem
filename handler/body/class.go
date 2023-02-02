@@ -26,3 +26,10 @@ type ElectiveReq struct {
 	StudentID string `json:"student_id"`
 	ClassID   int    `json:"class_id"`
 }
+
+type GetClassRes struct {
+	ID           int    `json:"id"`
+	Type         int    `json:"type"`
+	Name         string `json:"name"`
+	Introduction string `json:"introduction"`
+}

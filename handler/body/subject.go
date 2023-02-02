@@ -16,3 +16,9 @@ type UpdateSubjectReq struct {
 type DeleteSubjectReq struct {
 	ID int `json:"id"`
 }
+
+type GetSubjectRes struct {
+	ID      int    `json:"id"`
+	Content string `json:"content"`
+	Answer  string `json:"answer"`
+}

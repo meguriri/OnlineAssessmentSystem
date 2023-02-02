@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/meguriri/OnlineAssessmentSystem/constant"
 	"github.com/meguriri/OnlineAssessmentSystem/database/model"
 	database "github.com/meguriri/OnlineAssessmentSystem/database/operation"
 	"github.com/meguriri/OnlineAssessmentSystem/handler/body"
@@ -43,6 +44,7 @@ func CreateTestPaper(userID string, facilityValue int) (body.TestPaperRes, error
 	for _, item := range sujectList {
 		paper.SubjectList = fmt.Sprintf("%d,", item.ID)
 		testPaper.SubjectList = append(testPaper.SubjectList, body.Subject{
+			ID:      item.ID,
 			Content: item.Content,
 			Type:    item.Type,
 		})
@@ -57,4 +59,44 @@ func CreateTestPaper(userID string, facilityValue int) (body.TestPaperRes, error
 	}
 
 	return testPaper, nil
+}
+
+func GudgeAnwser(anwserList []body.Anwser) (body.SubmitAnwserRes, error) {
+	gudgeAnwser := body.SubmitAnwserRes{}
+
+	idList := []int{}
+	for _, item := range anwserList {
+		idList = append(idList, item.ID)
+	}
+
+	subjectList, err := database.GetSubject(idList)
+	if err != nil {
+		log.Printf("[GudgeAnwser] GetSubject err,idList:%+v,err:%+v", idList, err)
+		return gudgeAnwser, err
+	}
+
+	subjectMap := map[int]model.Subject{}
+
+	for _, item := range subjectList {
+		subjectMap[item.ID] = item
+	}
+
+	for _, item := range anwserList {
+		var typ int
+		if item.Anwser != subjectMap[item.ID].Answer {
+			typ = constant.WrongAnwser
+		} else {
+			typ = constant.TrueAnwser
+		}
+
+		gudgeAnwser.GudgeAnwser = append(gudgeAnwser.GudgeAnwser, body.GudgeAnwser{
+			ID:         item.ID,
+			TrueAnwser: subjectMap[item.ID].Answer,
+			Content:    subjectMap[item.ID].Content,
+			UserAnwser: item.Anwser,
+			Type:       typ,
+		})
+	}
+
+	return gudgeAnwser, nil
 }

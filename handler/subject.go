@@ -94,3 +94,19 @@ func DeleteSubject(c *gin.Context) {
 		Code: constant.CodeSuccess,
 	})
 }
+
+func GetSubjectList(c *gin.Context) {
+	res, err := internal.GetSubjectList()
+	if err != nil {
+		log.Printf("[GetSubjectList] GetSubjectList err,err:%+v", err)
+		c.JSON(http.StatusOK, body.Res{
+			Code: constant.CodeErr,
+			Msg:  err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, body.Res{
+		Code: constant.CodeSuccess,
+		Data: res,
+	})
+}

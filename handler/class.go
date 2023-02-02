@@ -146,3 +146,19 @@ func Elective(c *gin.Context) {
 		Code: constant.CodeSuccess,
 	})
 }
+
+func GetClassList(c *gin.Context) {
+	res, err := internal.GetClassList()
+	if err != nil {
+		log.Printf("[GetClassList] GetClassList err,err:%+v", err)
+		c.JSON(http.StatusOK, body.Res{
+			Code: constant.CodeErr,
+			Msg:  err.Error(),
+		})
+		return
+	}
+	c.JSON(http.StatusOK, body.Res{
+		Code: constant.CodeSuccess,
+		Data: res,
+	})
+}

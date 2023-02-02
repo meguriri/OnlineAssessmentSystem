@@ -26,6 +26,16 @@ func GetSubjectMaxIncrementID() (int, error) {
 	return maxID, nil
 }
 
+func GetAllSubject() ([]model.Subject, error) {
+	subjectList := []model.Subject{}
+
+	if err := db.Table(constant.TableSubject).Find(&subjectList).Error; !util.DBQueryErr(err) {
+		log.Printf("[GetAllSubject] Find err,err:%+v", err)
+		return nil, err
+	}
+	return subjectList, nil
+}
+
 func GetSubject(id []int) ([]model.Subject, error) {
 	subjectList := []model.Subject{}
 

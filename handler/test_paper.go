@@ -39,3 +39,32 @@ func CreateTestPaper(c *gin.Context) {
 		Data: testPaper,
 	})
 }
+
+func SubmitAnwser(c *gin.Context) {
+	req := body.SubmitAnwserReq{}
+
+	err := util.PostForm(c, &req)
+	if err != nil {
+		log.Printf("[SubmitAnwser] PostForm err,err:%+v", err)
+		c.JSON(http.StatusOK, body.Res{
+			Code: constant.CodeErr,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+	gudgeList, err := internal.GudgeAnwser(req.AnwserList)
+	if err != nil {
+		log.Printf("[SubmitAnwser] GudgeAnwser err,anwserList:%+v,err:%+v", req.AnwserList, err)
+		c.JSON(http.StatusOK, body.Res{
+			Code: constant.CodeErr,
+			Msg:  err.Error(),
+		})
+		return
+	}
+
+	c.JSON(http.StatusOK, body.Res{
+		Code: constant.CodeSuccess,
+		Data: gudgeList,
+	})
+}

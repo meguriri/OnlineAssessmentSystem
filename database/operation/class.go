@@ -5,11 +5,15 @@ import (
 
 	"github.com/meguriri/OnlineAssessmentSystem/constant"
 	"github.com/meguriri/OnlineAssessmentSystem/database/model"
+	"github.com/meguriri/OnlineAssessmentSystem/util"
 )
 
 func GetClassList() ([]model.Class, error) {
 	classList := []model.Class{}
-
+	if err := db.Table(constant.TableClass).Find(&classList).Error; !util.DBQueryErr(err) {
+		log.Printf("[GetClassList] find err,err:%+v", err)
+		return nil, err
+	}
 	return classList, nil
 }
 

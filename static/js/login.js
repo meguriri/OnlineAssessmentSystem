@@ -54,9 +54,7 @@ $(document).ready(function () {
                 success: function (res) {
                     console.log(res)
                     alertType(res.type,res.msg)
-                    if(res.type==1){
-                        setTimeout(function(){window.location.href = '/list'},900)
-                    }
+                    window.location.href = '/home'
                 }
             })
         }else{
@@ -85,6 +83,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     data: JSON.stringify(postData),
                     success: function (res) {
+                        window.location.href = '/home'
                         console.log(res)
                         alertType(res.type,res.msg)
                     }

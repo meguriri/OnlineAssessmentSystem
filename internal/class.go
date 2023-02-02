@@ -5,6 +5,7 @@ import (
 
 	"github.com/meguriri/OnlineAssessmentSystem/database/model"
 	database "github.com/meguriri/OnlineAssessmentSystem/database/operation"
+	"github.com/meguriri/OnlineAssessmentSystem/handler/body"
 )
 
 func CreateClass(name string, typ int, introduction string) error {
@@ -70,4 +71,24 @@ func Elective(studentID string, classID int) error {
 	}
 
 	return nil
+}
+
+func GetClassList() ([]body.GetClassRes, error) {
+	classList := []body.GetClassRes{}
+
+	class, err := database.GetClassList()
+	if err != nil {
+		log.Printf("[GetClassList] GetClassList err,err:%+v", err)
+	}
+
+	for _, item := range class {
+		classList = append(classList, body.GetClassRes{
+			ID:           item.ID,
+			Type:         item.Type,
+			Name:         item.Name,
+			Introduction: item.Introduction,
+		})
+	}
+
+	return classList, nil
 }
