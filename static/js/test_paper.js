@@ -24,7 +24,7 @@ function submit(){
         data: JSON.stringify(post_data),
         success: function (res) {
             console.log(res)
-            var info_list
+            let info_list=""
             var success="#0bf116;\">√"
             var fail   ="#f1130b;\">×"
             for(i=0;i<res.data.gudge_anwser.length;i++){
@@ -58,7 +58,7 @@ function get_test_paper(){
         dataType: "json",
         success: function (res) {
             console.log(res)
-            var info_list
+            let info_list=""
             for(i=0;i<res.data.subject_list.length;i++){
                 subject_number++
                 subject_id_list[i]=res.data.subject_list[i].id

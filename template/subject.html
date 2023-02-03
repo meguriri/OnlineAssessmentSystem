@@ -12,10 +12,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 
-<body class="text-center">
-
-    <a href="/add_subject" style="color:#ff4e00;">添加题目</a>
-    <div class="table_menu_list">
+<body>
+    <div class="text-center p-3 text-white" style="background-color:#d97127">
+        <h2 class="display-3">在线考试系统</h2>
+    </div>
+    <nav class="text-center navbar navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a data-bs-toggle="modal" data-bs-target="#addModal" class="nav-link" href="/add_subject"><h3 class="text-black-50">添加题目</h3></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="text-center  table_menu_list">
         <table class="table table-striped table-bordered table-hover" id="sample-table">
          <thead>
           <tr>
@@ -34,7 +46,62 @@
          </tr>
        </tbody>
      </table>
-    
+    </div>
 </body>
+<div class="modal" id="addModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+   
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">添加课程</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+   
+        <!-- 模态框内容 -->
+        <div class="modal-body">
+            <label for="content" class="form-label" style="text-align: left;"><h4>题目内容</h4></label>
+            <input type="text" id="content" class="form-control">
+            <label for="answer" class="form-label"><h4>答案</h4></label>
+            <input type="text" id="answer" class="form-control">
+        </div>
+   
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+        <button onclick="add_subject()" id="submit" type="button" class="btn btn-success" data-bs-dismiss="modal">添加</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+        </div>
+   
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="updateModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+   
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">更新课程</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+   
+        <!-- 模态框内容 -->
+        <div class="modal-body">
+            <label for="ucontent" class="form-label" style="text-align: left;"><h4>题目内容</h4></label>
+            <input type="text" id="ucontent" class="form-control">
+            <label for="uanswer" class="form-label"><h4>答案</h4></label>
+            <input type="text" id="uanswer" class="form-control">
+        </div>
+   
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+        <button id="upsubmit" type="button" class="btn btn-success" data-bs-dismiss="modal">更新</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">关闭</button>
+        </div>
+   
+      </div>
+    </div>
+  </div>
 <script type="text/javascript" src="../static/js/subject.js"></script>
 </html>
