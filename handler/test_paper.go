@@ -11,12 +11,12 @@ import (
 	"github.com/meguriri/OnlineAssessmentSystem/util"
 )
 
-func Login(c *gin.Context) {
-	user := body.UserLoginReq{}
+func CreateTestPaper(c *gin.Context) {
+	req := body.CreateTestPaperReq{}
 
-	err := util.PostForm(c, &user)
+	err := util.PostForm(c, &req)
 	if err != nil {
-		log.Printf("[Login] PostForm err,err:%+v", err)
+		log.Printf("[CreateTestPaper] PostForm err,err:%+v", err)
 		c.JSON(http.StatusOK, body.Res{
 			Code: constant.CodeErr,
 			Msg:  err.Error(),
@@ -24,9 +24,9 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	err = internal.Login(user.ID, user.Password, user.Type)
+	testPaper, err := internal.CreateTestPaper(req.UserID, req.FacilityValue)
 	if err != nil {
-		log.Printf("[Login] Login err,user:%+v,err:%+v", user, err)
+		log.Printf("[CreateTestPaper] CreateTestPaper err,req:%+v,err:%+v", req, err)
 		c.JSON(http.StatusOK, body.Res{
 			Code: constant.CodeErr,
 			Msg:  err.Error(),
@@ -36,15 +36,16 @@ func Login(c *gin.Context) {
 
 	c.JSON(http.StatusOK, body.Res{
 		Code: constant.CodeSuccess,
+		Data: testPaper,
 	})
 }
 
-func Register(c *gin.Context) {
-	user := body.RegisterReq{}
+func SubmitAnwser(c *gin.Context) {
+	req := body.SubmitAnwserReq{}
 
-	err := util.PostForm(c, &user)
+	err := util.PostForm(c, &req)
 	if err != nil {
-		log.Printf("[Register] PostForm err,err:%+v", err)
+		log.Printf("[SubmitAnwser] PostForm err,err:%+v", err)
 		c.JSON(http.StatusOK, body.Res{
 			Code: constant.CodeErr,
 			Msg:  err.Error(),
@@ -52,8 +53,9 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	if err := internal.CreateUser(user.ID, user.Name, user.Password, user.Type); err != nil {
-		log.Printf("[Register] CreateUser err,user:%+v,err:%+v", user, err)
+	gudgeList, err := internal.GudgeAnwser(req.AnwserList)
+	if err != nil {
+		log.Printf("[SubmitAnwser] GudgeAnwser err,anwserList:%+v,err:%+v", req.AnwserList, err)
 		c.JSON(http.StatusOK, body.Res{
 			Code: constant.CodeErr,
 			Msg:  err.Error(),
@@ -63,20 +65,6 @@ func Register(c *gin.Context) {
 
 	c.JSON(http.StatusOK, body.Res{
 		Code: constant.CodeSuccess,
+		Data: gudgeList,
 	})
-}
-
-func UpdateUser(c *gin.Context) {
-	updateInfo := body.UpdateUserReq{}
-
-	err := util.PostForm(c, &updateInfo)
-	if err != nil {
-		log.Printf("[UpdateUser] PostForm err,err:%+v", err)
-		c.JSON(http.StatusOK, body.Res{
-			Code: constant.CodeErr,
-			Msg:  err.Error(),
-		})
-		return
-	}
-
 }

@@ -40,19 +40,21 @@ $(document).ready(function () {
         })
     })
     $("#login").click(function () {
-        console.log($('#form1').serialize())
+        let data = $('#form1').serializeArray()
         if($('#floatingInput').val()!=""&&$('#floatingPassword').val()!=""){
+            let postData={
+                id:$('#id').val(),
+                password:$('#password').val()
+            }
             $.ajax({
                 type: 'post',
                 url: '/login',
                 dataType: 'json',
-                data: $('#form1').serialize(),//序列化表单值
+                data: JSON.stringify(postData),
                 success: function (res) {
                     console.log(res)
                     alertType(res.type,res.msg)
-                    if(res.type==1){
-                        setTimeout(function(){window.location.href = '/list'},900)
-                    }
+                    window.location.href = '/home'
                 }
             })
         }else{
@@ -61,23 +63,27 @@ $(document).ready(function () {
     })
 
     $('#sign').click(function(){
+
+
         let data = $('#form1').serializeArray()
         console.log(data)
         if($('#floatingInput').val()!=""&&$('#floatingPassword').val()!=""&&$('#floatingcheckPassword').val()!="" ){
             if(data[1].value!=data[2].value){
                 alertType(2,"两次密码不一致!")
                 $('#floatingcheckPassword').val('')
-            }else if($('#floatingPassword').val().trim().length<8){
-                alertType(2,"密码至少为8位，请重新输入!")
-                $('#floatingcheckPassword').val('')
-                $('#floatingPassword').val('')
             }else{
+                let postData={
+                    id:$('#id').val(),
+                    password:$('#password').val(),
+                    type:1
+                }
                 $.ajax({
                     type: 'post',
-                    url: '/sign',
+                    url: '/register',
                     dataType: 'json',
-                    data: $('#form1').serialize(),//序列化表单值
+                    data: JSON.stringify(postData),
                     success: function (res) {
+                        window.location.href = '/home'
                         console.log(res)
                         alertType(res.type,res.msg)
                     }

@@ -7,7 +7,13 @@ const (
 )
 
 const (
-	TableUser = "user"
+	TableUser           = "user"
+	TableKnowledgePoint = "knowledge_point"
+	TableClass          = "class"
+	TableTeach          = "teach"
+	TableElective       = "elective"
+	TableSubject        = "subject"
+	TableTestPaper      = "test_paper"
 )
 
 const (
